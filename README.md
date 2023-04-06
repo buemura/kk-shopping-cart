@@ -30,6 +30,12 @@ sh start.sh
 npm run docker:up
 ```
 
+- \*\*If starting manually, for `products-service` also run the commands below:
+
+```bash
+npm install && npm run seed:dev
+```
+
 3. To stop apps and local databases **(It needs to be done for each services, including backend)**
 
 - You can execute one script to stop all the services with:
