@@ -2,6 +2,13 @@
 
 The shopping cart main repository.
 
+- [Setup](#setup)
+- [How to run on local environment](#how-to-run-on-local-environment)
+  - [APIs documentation](#apis-documentation)
+- [Requirements](#requirements)
+- [Architecture design](#architecture-design)
+- [Pending points](#pending-points)
+
 ## Setup
 
 - clone the repository with the command below:
@@ -104,3 +111,9 @@ Development of three services. The communication between the services can be don
 ## Architecture design
 
 ![Architecture](./docs/architecture.png)
+
+## Pending points
+
+- Implementation of a better test suite.
+- Implementation of authentication feature
+- Refactor services to be more decoupled
