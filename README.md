@@ -2,6 +2,33 @@
 
 The shopping cart main repository.
 
+## How to run on local environment
+
+- To run on local environment you will need to have `node`, `docker` and `docker-compose` installed.
+
+1. Make sure to have the `.env` on root of all sub repositories.
+
+2. To start app and local database **(It needs to be done for each services, including backend)**
+
+```bash
+npm run docker:up
+```
+
+3. To stop app and local database **(It needs to be done for each services, including backend)**
+
+```bash
+npm run docker:down
+```
+
+### APIs documentation
+
+- backend:
+  - With application running, go to `http://localhost:8080/api/docs` to see the Swagger documentation.
+- product-service:
+  - With application running, go to `http://localhost:8081/api/docs` to see the Swagger documentation.
+- cart-service:
+  - With application running, go to `http://localhost:8082/api/docs` to see the Swagger documentation.
+
 ## Requirements
 
 Development of three services. The communication between the services can be done through HTTP:
