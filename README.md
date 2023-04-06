@@ -16,13 +16,29 @@ git clone --recurse-submodules https://github.com/buemura/kk-shopping-cart.git
 
 1. Make sure to have the `.env` on root of all sub repositories.
 
-2. To start app and local database **(It needs to be done for each services, including backend)**
+2. To start apps and local databases
+
+- You can execute one script to start all the services with:
+
+```bash
+sh start.sh
+```
+
+- Or you can manually start each service with the command below: **(It needs to be done for each services, including backend)**
 
 ```bash
 npm run docker:up
 ```
 
-3. To stop app and local database **(It needs to be done for each services, including backend)**
+3. To stop apps and local databases **(It needs to be done for each services, including backend)**
+
+- You can execute one script to stop all the services with:
+
+```bash
+sh stop.sh
+```
+
+- Or you can manually stop each service with the command below: **(It needs to be done for each services, including backend)**
 
 ```bash
 npm run docker:down
