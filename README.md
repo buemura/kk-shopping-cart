@@ -2,6 +2,14 @@
 
 The shopping cart main repository.
 
+## Setup
+
+- clone the repository with the command below:
+
+```bash
+git clone --recurse-submodules https://github.com/buemura/kk-shopping-cart.git
+```
+
 ## How to run on local environment
 
 - To run on local environment you will need to have `node`, `docker` and `docker-compose` installed.
