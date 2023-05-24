@@ -14,44 +14,39 @@ The shopping cart main repository.
 - clone the repository with the command below:
 
 ```bash
-git clone --recurse-submodules https://github.com/buemura/kk-shopping-cart.git
+git clone https://github.com/buemura/kk-shopping-cart.git
 ```
 
 ## How to run on local environment
 
 - To run on local environment you will need to have `node`, `docker` and `docker-compose` installed.
 
-1. Make sure to have the `.env` on root of all sub repositories.
+1. Make sure to have the `.env` on root of all applications inside `apps/` directory.
 
-2. To start apps and local databases
+2. To start all the required databases
 
-- You can execute one script to start all the services with:
-
-```bash
-sh start.sh
-```
-
-- Or you can manually start each service with the command below: **(It needs to be done for each services, including backend)**
+- You can execute the script below to start an instance of mongodb and postgresql:
 
 ```bash
-npm run docker:up
+pnpm run docker:up
 ```
 
-- \*\*If starting manually, for `products-service` also run the commands below:
+- Then install all the dependencies:
 
 ```bash
-npm install && npm run seed:dev
+pnpm install
 ```
 
-3. To stop apps and local databases **(It needs to be done for each services, including backend)**
-
-- You can execute one script to stop all the services with:
+- And finally seed the `product-service` database by using the command below:
 
 ```bash
-sh stop.sh
+cd apps/product-service
+pnpm seed:dev
 ```
 
-- Or you can manually stop each service with the command below: **(It needs to be done for each services, including backend)**
+3. To stop apps and local databases
+
+- You can execute the script below to stop the mongodb and postgresql:
 
 ```bash
 npm run docker:down
