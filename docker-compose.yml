@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  kk_products_mongodb:
+    image: mongo:latest
+    container_name: kk_products_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data/mongodata:/data/db
+
+  kk_cart_postgres:
+    image: postgres:latest
+    container_name: kk_cart_postgres
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: kk_cart
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data/pgdata:/var/lib/postgresql/data
+
+  # kk_products_service:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/product-service/Dockerfile
+  #   depends_on:
+  #     - kk_products_mongodb
+  #   container_name: kk_products_service
+  #   ports:
+  #     - '8081:8081'
+
+  # kk_carts_service:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/cart-service/Dockerfile
+  #   depends_on:
+  #     - kk_cart_postgres
+  #   container_name: kk_carts_service
+  #   ports:
+  #     - '8082:8082'
+
+  # kk_backend:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/backend/Dockerfile
+  #   depends_on:
+  #     - kk_products_service
+  #     - kk_carts_service
+  #   container_name: kk_backend
+  #   ports:
+  #     - '8080:8080'
