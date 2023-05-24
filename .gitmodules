@@ -1,9 +1,0 @@
-[submodule "kk-backend"]
-	path = kk-backend
-	url = https://github.com/buemura/kk-backend
-[submodule "kk-products-service"]
-	path = kk-products-service
-	url = https://github.com/buemura/kk-products-service
-[submodule "kk-cart-service"]
-	path = kk-cart-service
-	url = https://github.com/buemura/kk-cart-service
