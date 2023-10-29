@@ -1,34 +1,12 @@
-// import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-// @Injectable()
-// export class RemoveItemUsecase {
-//   async execute(cartId: string, productId: string) {
-//     const cart = await this.cartRepository.findOne({
-//       where: { shoppingCartId: cartId },
-//     });
+import { ItemRepository } from '@domain/item/repositories';
 
-//     if (!cart) {
-//       throw new BadRequestException(ERROR_MESSAGE.CART_NOT_FOUND);
-//     }
+@Injectable()
+export class RemoveItemUsecase {
+  constructor(private readonly itemRepository: ItemRepository) {}
 
-//     const product = await this.cartProductsRepository.findOne({
-//       where: {
-//         productId,
-//         cart: {
-//           shoppingCartId: cartId,
-//         },
-//       },
-//     });
-//     if (!product) {
-//       throw new BadRequestException(ERROR_MESSAGE.PRODUCT_NOT_FOUND);
-//     }
-
-//     cart.decrementTotals(product.price, product.quantity);
-//     await this.cartRepository.save(cart);
-
-//     await this.cartProductsRepository.delete({
-//       cart: { shoppingCartId: cartId },
-//       productId,
-//     });
-//   }
-// }
+  async execute(itemId: string): Promise<void> {
+    await this.itemRepository.remove(itemId);
+  }
+}

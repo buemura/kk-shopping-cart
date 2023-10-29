@@ -1,13 +1,22 @@
 import { Injectable } from '@nestjs/common';
 
 import { Item } from '@domain/item/entities';
+import { ItemNotFoundError } from '@domain/item/errors';
 import { ItemRepository } from '@domain/item/repositories';
 
 @Injectable()
-export class GetItemOnCartUsecase {
+export class GetProductOnCartUsecase {
   constructor(private readonly itemRepository: ItemRepository) {}
 
   async execute(cartId: string, productId: string): Promise<Item> {
-    return this.itemRepository.findByCartAndItem(cartId, productId);
+    const item = await this.itemRepository.findByCartAndProduct(
+      cartId,
+      productId,
+    );
+    if (!item) {
+      throw new ItemNotFoundError();
+    }
+
+    return item;
   }
 }

@@ -9,7 +9,7 @@ export class AddItemUsecase {
   constructor(private readonly itemRepository: ItemRepository) {}
 
   async execute(props: ICreateItemIn): Promise<Item> {
-    const cartItem = await this.itemRepository.findByCartAndItem(
+    const cartItem = await this.itemRepository.findByCartAndProduct(
       props.cartId,
       props.productId,
     );

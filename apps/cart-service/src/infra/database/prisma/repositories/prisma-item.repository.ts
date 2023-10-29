@@ -8,7 +8,13 @@ import { PrismaService } from '../prisma.service';
 export class PrismaItemRepository implements ItemRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findByCartAndItem(cartId: string, productId: string): Promise<Item> {
+  async findById(id: string): Promise<Item> {
+    return this.prisma.item.findFirst({
+      where: { id },
+    });
+  }
+
+  async findByCartAndProduct(cartId: string, productId: string): Promise<Item> {
     return this.prisma.item.findFirst({
       where: {
         cartId,
@@ -22,6 +28,12 @@ export class PrismaItemRepository implements ItemRepository {
       where: { id: item.id },
       create: item,
       update: item,
+    });
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.prisma.item.delete({
+      where: { id },
     });
   }
 }

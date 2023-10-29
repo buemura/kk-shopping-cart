@@ -1,17 +1,19 @@
 import 'dotenv/config';
 
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { AppModule } from './infra/app.module';
+import { AppModule } from '@infra/app.module';
+import { AllExceptionsFilter } from '@infra/filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
   app.enableCors();
+  app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.setGlobalPrefix('/api');
 
@@ -27,4 +29,5 @@ async function bootstrap() {
   const port = configService.getOrThrow<number>('PORT');
   await app.listen(port);
 }
+
 bootstrap().then(() => console.log('Cart Service running on 8082...'));
