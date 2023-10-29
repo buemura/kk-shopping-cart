@@ -1,9 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProductController } from '../../../../src/api/product/product.controller';
-import { GetAllProductsUsecase } from '../../../../src/app/product/get-all-products.usecase';
-import { productsArray } from '../../../mocks/products.mocks';
 
-describe('ProductsController', () => {
+import { ProductController } from '@api/product/product.controller';
+import { CreateProductUsecase } from '@app/product';
+import { GetAllProductsUsecase } from '@app/product/get-all-products.usecase';
+import { mockProduct, productsArray } from '../../../mocks/products.mocks';
+
+describe('ProductController', () => {
   let controller: ProductController;
 
   beforeEach(async () => {
@@ -13,17 +15,19 @@ describe('ProductsController', () => {
         {
           provide: GetAllProductsUsecase,
           useValue: {
-            getAllProducts: jest.fn().mockResolvedValue(productsArray),
+            execute: jest.fn().mockResolvedValue(productsArray),
+          },
+        },
+        {
+          provide: CreateProductUsecase,
+          useValue: {
+            execute: jest.fn().mockResolvedValue(mockProduct),
           },
         },
       ],
     }).compile();
 
     controller = module.get(ProductController);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
   });
 
   describe('getAll()', () => {

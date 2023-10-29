@@ -1,15 +1,18 @@
 export const mockProduct = {
-  productId: '0001',
+  id: '0001',
+  name: 'android 99',
   price: 100,
 };
 
 export const productsArray = [
   {
-    productId: '0001',
+    id: '0001',
+    name: 'iphone 99',
     price: 100,
   },
   {
-    productId: '0002',
+    id: '0002',
+    name: 'macbook 99',
     price: 34,
   },
 ];

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import mongoose from 'mongoose';
 
 import { ProductRepository } from '@domain/product/repositories';
@@ -9,7 +10,9 @@ import { MongoProductRepository } from './mongo/repositories';
   providers: [
     {
       provide: 'DATABASE_CONNECTION',
-      useFactory: () => mongoose.connect(process.env.DATABASE_URL),
+      useFactory: (configService: ConfigService) =>
+        mongoose.connect(configService.getOrThrow<string>('DATABASE_URL')),
+      inject: [ConfigService],
     },
     {
       provide: 'PRODUCT_MODEL',
