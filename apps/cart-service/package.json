@@ -20,11 +20,16 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "docker:up": "docker-compose build && docker-compose up -d",
-    "docker:down": "docker-compose down"
+    "env:up": "docker-compose build && docker-compose up -d",
+    "env:down": "docker-compose down",
+    "typeorm": "npm run build && npx typeorm -d dist/infra/database/typeorm/data-source.js",
+    "migration:generate": "npm run typeorm -- migration:generate",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
