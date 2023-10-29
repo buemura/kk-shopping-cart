@@ -7,6 +7,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from '@infra/app.module';
 import { AllExceptionsFilter } from '@infra/filters';
+import { LoggerInterceptor } from '@infra/interceptors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalInterceptors(new LoggerInterceptor());
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
