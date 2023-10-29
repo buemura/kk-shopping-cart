@@ -1,4 +1,4 @@
-# kk-products-service
+# products-service
 
 The products service of a shopping cart project.
 

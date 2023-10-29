@@ -1,4 +1,4 @@
-# kk-cart-service
+# cart-service
 
 The cart service of a shopping cart project.
 
