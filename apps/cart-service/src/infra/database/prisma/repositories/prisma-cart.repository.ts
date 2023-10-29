@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { Cart } from '@domain/cart/entities/cart';
+import { IGetCartOptions } from '@domain/cart/interfaces';
 import { CartRepository } from '@domain/cart/repositories';
 import { PrismaService } from '../prisma.service';
 
@@ -8,21 +9,29 @@ import { PrismaService } from '../prisma.service';
 export class PrismaCartRepository implements CartRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findById(id: string): Promise<Cart> {
+  async findById(id: string, options?: IGetCartOptions): Promise<Cart> {
+    let include = {};
+
+    if (options?.include) {
+      include = options.include;
+    }
+
     return this.prisma.cart.findFirst({
       where: { id },
-      include: {
-        items: true,
-      },
+      include,
     });
   }
 
-  async findByUserId(userId: string): Promise<Cart> {
+  async findByUserId(userId: string, options?: IGetCartOptions): Promise<Cart> {
+    let include = {};
+
+    if (options?.include) {
+      include = options.include;
+    }
+
     return this.prisma.cart.findFirst({
       where: { userId },
-      include: {
-        items: true,
-      },
+      include,
     });
   }
 

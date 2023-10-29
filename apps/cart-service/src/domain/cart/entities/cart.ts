@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto';
-import { ICreateCartIn } from '../interfaces';
+
+import { ICreateCartIn } from '@domain/cart/interfaces';
 
 export class Cart {
   id: string;

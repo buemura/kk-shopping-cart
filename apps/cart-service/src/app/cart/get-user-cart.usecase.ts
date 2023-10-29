@@ -7,7 +7,11 @@ import { CartRepository } from '@domain/cart/repositories';
 export class GetUserCartUsecase {
   constructor(private readonly cartRepository: CartRepository) {}
 
-  async execute(userId: string): Promise<Cart> {
-    return this.cartRepository.findByUserId(userId);
+  async execute(userId: string, incluteItems: boolean = false): Promise<Cart> {
+    return this.cartRepository.findByUserId(userId, {
+      include: {
+        items: incluteItems,
+      },
+    });
   }
 }

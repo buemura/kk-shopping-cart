@@ -24,7 +24,7 @@ export class CartController {
     isArray: true,
   })
   async getCartsByUserId(@Param('userId') userId: string): Promise<Cart> {
-    return this.getUserCartUsecase.execute(userId);
+    return this.getUserCartUsecase.execute(userId, true);
   }
 
   @Post('users/:userId/carts')
