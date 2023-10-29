@@ -1,4 +1,4 @@
-import { Item } from '@domain/item/entities';
+import { randomUUID } from 'crypto';
 import { ICreateCartIn } from '../interfaces';
 
 export class Cart {
@@ -6,27 +6,17 @@ export class Cart {
   userId: string;
   totalPrice: number;
   totalQuantity: number;
-  items: Item[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 
   constructor(props: ICreateCartIn) {
     if (!props) {
       return;
     }
 
+    this.id = randomUUID();
     this.userId = props.userId;
     this.totalPrice = 0;
     this.totalQuantity = 0;
-  }
-
-  incrementTotals(totalPrice: number, totalQuantity: number) {
-    this.totalPrice += totalPrice;
-    this.totalQuantity += totalQuantity;
-  }
-
-  decrementTotals(totalPrice: number, totalQuantity: number) {
-    this.totalPrice -= totalPrice;
-    this.totalQuantity -= totalQuantity;
   }
 }

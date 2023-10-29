@@ -1,12 +1,12 @@
+import { Item } from '@domain/item/entities';
 import { ApiProperty } from '@nestjs/swagger';
-import { TypeOrmItem } from './infra/database/typeorm/entities/item.entity';
 
 export class SwaggerCartResponse {
   @ApiProperty({
     example: '71743e67-2445-49ba-b6f7-f7173e61c1cd',
     description: 'The shopping cart id',
   })
-  shoppingCartId: string;
+  id: string;
 
   @ApiProperty({
     example: 'user-001',
@@ -33,7 +33,7 @@ export class SwaggerCartResponse {
     ],
     description: 'Products on cart',
   })
-  items: TypeOrmItem[];
+  items: Item[];
 
   @ApiProperty({
     example: new Date(),

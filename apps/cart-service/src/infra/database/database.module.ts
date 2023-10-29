@@ -1,41 +1,23 @@
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
-import { DataSource, DataSourceOptions } from 'typeorm';
 import { CartRepository } from '@domain/cart/repositories';
 import { ItemRepository } from '@domain/item/repositories';
+import { PrismaService } from './prisma';
 import {
-  TypeOrmCartRepository,
-  TypeOrmItemRepository,
-} from './typeorm/repositories';
+  PrismaCartRepository,
+  PrismaItemRepository,
+} from './prisma/repositories';
 
 @Module({
   providers: [
-    {
-      provide: 'TYPEORM_CONNECTION',
-      useFactory: (cs: ConfigService) => {
-        const dataSourceOptions: DataSourceOptions = {
-          type: 'postgres',
-          host: cs.getOrThrow<string>('DATABASE_HOST'),
-          port: cs.getOrThrow<number>('DATABASE_PORT'),
-          username: cs.getOrThrow<string>('DATABASE_USER'),
-          password: cs.getOrThrow<string>('DATABASE_PASS'),
-          database: cs.getOrThrow<string>('DATABASE_NAME'),
-          entities: ['dist/**/*.entity.js'],
-          migrations: ['dist/infra/database/typeorm/migrations/*.js'],
-          useUTC: false,
-        };
-        return new DataSource(dataSourceOptions);
-      },
-      inject: [ConfigService],
-    },
+    PrismaService,
     {
       provide: CartRepository,
-      useClass: TypeOrmCartRepository,
+      useClass: PrismaCartRepository,
     },
     {
       provide: ItemRepository,
-      useClass: TypeOrmItemRepository,
+      useClass: PrismaItemRepository,
     },
   ],
   exports: [CartRepository, ItemRepository],

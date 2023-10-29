@@ -8,9 +8,9 @@ import { ItemRepository } from '@domain/item/repositories';
 export class AddItemUsecase {
   constructor(private readonly itemRepository: ItemRepository) {}
 
-  async execute(cartId: string, props: ICreateItemIn): Promise<Item> {
+  async execute(props: ICreateItemIn): Promise<Item> {
     const cartItem = await this.itemRepository.findByCartAndItem(
-      cartId,
+      props.cartId,
       props.productId,
     );
 
@@ -22,6 +22,7 @@ export class AddItemUsecase {
       item = cartItem;
     } else {
       item = new Item({
+        cartId: props.cartId,
         productId: props.productId,
         price: props.price,
         quantity: props.quantity,

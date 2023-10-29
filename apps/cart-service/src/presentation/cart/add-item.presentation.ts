@@ -28,13 +28,16 @@ export class AddItemPresentation {
       cart = await this.createCartUsecase.execute(userId);
     }
 
-    await this.addItemUsecase.execute(cart.id, {
+    await this.addItemUsecase.execute({
+      cartId: cart.id,
       productId,
       price,
       quantity,
     });
 
-    cart.incrementTotals(price, quantity);
+    cart.totalPrice += price;
+    cart.totalQuantity += quantity;
+
     return this.updateCartUsecase.execute(cart);
   }
 }
