@@ -15,7 +15,7 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  app.setGlobalPrefix('/api');
+  app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
     .setTitle('Carts service')
@@ -24,7 +24,7 @@ async function bootstrap() {
     .addTag('carts')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/api/docs', app, document);
+  SwaggerModule.setup('api/docs', app, document);
 
   const port = configService.getOrThrow<number>('PORT');
   await app.listen(port);

@@ -21,7 +21,8 @@
       "@api/*": ["src/api/*"],
       "@app/*": ["src/app/*"],
       "@domain/*": ["src/domain/*"],
-      "@infra/*": ["src/infra/*"]
+      "@infra/*": ["src/infra/*"],
+      "@presentation/*": ["src/presentation/*"]
     }
   }
 }
