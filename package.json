@@ -1,16 +1,16 @@
 {
-  "name": "kk-shopping-cart",
+  "name": "shopping-cart",
   "version": "1.0.0",
   "description": "The shopping cart main repository.",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buemura/kk-shopping-cart.git"
+    "url": "git+https://github.com/buemura/shopping-cart.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "homepage": "https://github.com/buemura/kk-shopping-cart#readme",
+  "homepage": "https://github.com/buemura/shopping-cart#readme",
   "packageManager": "pnpm@7.15.0",
   "scripts": {
     "build": "turbo build",
