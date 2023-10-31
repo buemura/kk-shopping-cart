@@ -19,14 +19,14 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.setGlobalPrefix('api');
 
-  // const config = new DocumentBuilder()
-  //   .setTitle('API Gateway')
-  //   .setDescription('This Api gateway is the entrypoint')
-  //   .setVersion('1.0')
-  //   .addTag('api-gateway')
-  //   .build();
-  // const document = SwaggerModule.createDocument(app, config);
-  // SwaggerModule.setup('api/docs', app, document);
+  const config = new DocumentBuilder()
+    .setTitle('API Gateway')
+    .setDescription('This Api gateway is the entrypoint')
+    .setVersion('1.0')
+    .addTag('api-gateway')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
 
   const port = configService.getOrThrow<number>('PORT');
   await app.listen(port);
