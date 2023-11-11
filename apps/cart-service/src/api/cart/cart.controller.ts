@@ -67,16 +67,15 @@ export class CartController {
     }
   }
 
-  @Delete('carts/:cartId/product/:productId')
+  @Delete('users/:userId/carts/:cartId/product/:productId')
   @HttpCode(204)
   @ApiNoContentResponse()
   async removeProduct(
     @Param('cartId') cartId: string,
     @Param('productId') productId: string,
-  ) {
+  ): Promise<void> {
     try {
-      const res = await this.removeItemPresentation.execute(cartId, productId);
-      return res;
+      await this.removeItemPresentation.execute(cartId, productId);
     } catch (error) {
       throw new HttpException(error.message, error.httpStatusCode);
     }

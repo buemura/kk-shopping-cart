@@ -24,7 +24,7 @@ services:
     volumes:
       - ./data/pgdata:/var/lib/postgresql/data
 
-  # kk_products_service:
+  # products_service:
   #   build:
   #     context: .
   #     dockerfile: ./apps/product-service/Dockerfile
@@ -34,13 +34,13 @@ services:
   #   ports:
   #     - '8081:8081'
 
-  # kk_carts_service:
+  # carts_service:
   #   build:
   #     context: .
   #     dockerfile: ./apps/cart-service/Dockerfile
   #   depends_on:
   #     - kk_cart_postgres
-  #   container_name: kk_carts_service
+  #   container_name: carts_service
   #   ports:
   #     - '8082:8082'
 
@@ -49,8 +49,8 @@ services:
   #     context: .
   #     dockerfile: ./apps/backend/Dockerfile
   #   depends_on:
-  #     - kk_products_service
-  #     - kk_carts_service
+  #     - products_service
+  #     - carts_service
   #   container_name: kk_backend
   #   ports:
   #     - '8080:8080'

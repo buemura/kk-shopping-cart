@@ -12,7 +12,7 @@ export class RemoveItemPresentation {
     private readonly removeItemUsecase: RemoveItemUsecase,
   ) {}
 
-  async execute(cartId: string, productId: string) {
+  async execute(cartId: string, productId: string): Promise<void> {
     const cart = await this.getCartUsecase.execute(cartId);
     const item = await this.getProductOnCartUsecase.execute(cart.id, productId);
 
