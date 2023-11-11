@@ -7,6 +7,7 @@ import {
   HttpException,
   Param,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ApiNoContentResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
@@ -17,13 +18,14 @@ import {
   RemoveItemPresentation,
 } from '@presentation/cart';
 import {
+  AddCartItemDto,
   SwaggerAddProductResponse,
   SwaggerCartResponse,
-} from '../../swagger-cart';
-import { AddCartItemDto } from './dtos/add-cart-item.dto';
+  UserCartQueryDto,
+} from './dtos';
 
 @ApiTags('carts')
-@Controller()
+@Controller('carts')
 export class CartController {
   constructor(
     private readonly getUserCartUsecase: GetUserCartUsecase,
@@ -31,12 +33,12 @@ export class CartController {
     private readonly removeItemPresentation: RemoveItemPresentation,
   ) {}
 
-  @Get('users/:userId/carts')
+  @Get()
   @ApiOkResponse({
     type: SwaggerCartResponse,
     isArray: true,
   })
-  async getCartsByUserId(@Param('userId') userId: string): Promise<Cart> {
+  async getCartsByUserId(@Query() { userId }: UserCartQueryDto): Promise<Cart> {
     try {
       const res = await this.getUserCartUsecase.execute(userId, true);
       return res;
@@ -45,12 +47,12 @@ export class CartController {
     }
   }
 
-  @Post('users/:userId/carts')
+  @Post()
   @ApiOkResponse({
     type: SwaggerAddProductResponse,
   })
   async addProduct(
-    @Param('userId') userId: string,
+    @Query() { userId }: UserCartQueryDto,
     @Body() addCartProductDto: AddCartItemDto,
   ): Promise<Cart> {
     try {
@@ -67,12 +69,13 @@ export class CartController {
     }
   }
 
-  @Delete('users/:userId/carts/:cartId/product/:productId')
+  @Delete(':cartId/products/:productId')
   @HttpCode(204)
   @ApiNoContentResponse()
   async removeProduct(
     @Param('cartId') cartId: string,
     @Param('productId') productId: string,
+    @Query() { userId }: UserCartQueryDto,
   ): Promise<void> {
     try {
       await this.removeItemPresentation.execute(cartId, productId);

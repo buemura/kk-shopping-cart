@@ -31,7 +31,7 @@ export class CartController {
       this.httpService.get(
         `${this.configService.getOrThrow(
           'CART_SERVICE',
-        )}/users/${userId}/carts`,
+        )}/carts?userId=${userId}`,
       ),
     );
 
@@ -49,7 +49,7 @@ export class CartController {
       this.httpService.post(
         `${this.configService.getOrThrow(
           'CART_SERVICE',
-        )}/users/${userId}/carts`,
+        )}/carts?userId=${userId}`,
         {
           ...body,
           userId,
@@ -73,7 +73,7 @@ export class CartController {
         this.httpService.delete(
           `${this.configService.getOrThrow(
             'CART_SERVICE',
-          )}/users/${userId}/carts/${cartId}/products/${productId}`,
+          )}/carts/${cartId}/products/${productId}?userId=${userId}`,
         ),
       );
       return plainToInstance(CartDto, data);
