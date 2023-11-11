@@ -68,18 +68,13 @@ export class CartController {
     @Query() query: UserCartQueryDto,
   ): Promise<CartDto> {
     const { userId } = query;
-    try {
-      const { data } = await firstValueFrom<{ data: CartDto }>(
-        this.httpService.delete(
-          `${this.configService.getOrThrow(
-            'CART_SERVICE',
-          )}/carts/${cartId}/products/${productId}?userId=${userId}`,
-        ),
-      );
-      return plainToInstance(CartDto, data);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    const { data } = await firstValueFrom<{ data: CartDto }>(
+      this.httpService.delete(
+        `${this.configService.getOrThrow(
+          'CART_SERVICE',
+        )}/carts/${cartId}/products/${productId}?userId=${userId}`,
+      ),
+    );
+    return plainToInstance(CartDto, data);
   }
 }
